@@ -5,11 +5,6 @@ This repository is based on **_Introduction to Algorithms_** by **Thomas H. Corm
 
 The book encompasses **6 main chapters**:
 1. Foundations
-- The Role of Algorithms in Computing
-- Getting Started
-- Characterizing Running Times
-- Divide-and-Conquer
-- Probabilistic Analysis and Randomized Algorithms   
 2. Sorting and Order Statistics
 3. Data Structures
 4. Advanced Design and Analysis Techniques
