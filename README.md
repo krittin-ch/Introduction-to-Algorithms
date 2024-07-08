@@ -3,7 +3,7 @@
 ## Overview
 This repository is based on **_Introduction to Algorithms_** by **Thomas H. Cormen**, **Charles E. Leiserson**, **Ronald L. Rivest**, and **Clifford Stein**.
 
-The book encompasses **6 main chapters**:
+The book consists of **6 main chapters**:
 1. Foundations
 2. Sorting and Order Statistics
 3. Data Structures
@@ -11,11 +11,11 @@ The book encompasses **6 main chapters**:
 5. Advanced Data Structures
 6. Graph Algorithms
 
-
+<!-- 
 However, this repository focuses on the practical implementations of the following two chapters:
 
 Chapter 2: Predicate Logic
-- This section leverages Alloy, a tool for modeling and analysis, to implement predicate logic. Alloy's advantages allow us t0 study intricate systems and create instances for examination and study of logical restrictions and properties.
+- This section leverages Alloy, a tool for modeling and analysis, to implement predicate logic. Alloy's advantages allow us t0 study intricate systems and create instances for examination and study of logical restrictions and properties. -->
 
 
 Chapter 3: Verification by Model Checking
