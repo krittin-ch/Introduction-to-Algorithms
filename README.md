@@ -11,6 +11,8 @@ The book consists of **6 main chapters**:
 5. Advanced Data Structures
 6. Graph Algorithms
 
+The details for each chapter can be seen [Here](docs/Chapters.md).
+
 <!-- 
 However, this repository focuses on the practical implementations of the following two chapters:
 
