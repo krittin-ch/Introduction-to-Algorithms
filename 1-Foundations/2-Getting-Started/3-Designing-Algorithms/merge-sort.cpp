@@ -66,10 +66,10 @@ void mergeSort(int A[], int p, int r) {
 }
 
 int main() {
-    int arr[6] = {31, 41, 59, 26, 41, 58};
+    int arr[8] = {3, 41, 52, 26, 38, 57, 9, 49};
 
-    mergeSort(arr, 0, 5);
-    display_array(arr, 6);
+    mergeSort(arr, 0, 7);
+    display_array(arr, 8);
     
     return 0;
 }
