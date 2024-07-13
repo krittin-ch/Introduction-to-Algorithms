@@ -5,15 +5,15 @@ const int MAX = 100;
 using namespace std;
 
 void copySubMatrix(int source[][MAX], int dest[][MAX], int startRow, int startCol, int numRows, int numCols) {
-    for (int i = 0; i < numRows; ++i) {
-        for (int j = 0; j < numCols; ++j) {
+    for (int i = 0; i < numRows; i++) {
+        for (int j = 0; j < numCols; j++) {
             dest[i][j] = source[startRow + i][startCol + j];
         }
     }
 }
 
 
-void initizializeZeros(int C[][MAX], int n) {
+void initializeZeros(int C[][MAX], int n) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             C[i][j] = 0;
@@ -56,10 +56,10 @@ void matrixAddRecursive(int A[][MAX], int B[][MAX], int C[][MAX], int n) {
     copySubMatrix(B, B_21, half_n, 0, half_n, half_n);
     copySubMatrix(B, B_22, half_n, half_n, half_n, half_n);
 
-    initizializeZeros(C_11, half_n);
-    initizializeZeros(C_12, half_n);
-    initizializeZeros(C_21, half_n);
-    initizializeZeros(C_22, half_n);
+    initializeZeros(C_11, half_n);
+    initializeZeros(C_12, half_n);
+    initializeZeros(C_21, half_n);
+    initializeZeros(C_22, half_n);
 
     matrixAddRecursive(A_11, B_11, C_11, half_n);
     matrixAddRecursive(A_12, B_12, C_12, half_n);
@@ -88,7 +88,7 @@ void displayMatrix(int M[][MAX], int n) {
 }
 
 int main() {
-    int n = 2;
+    int n = 4;
 
     int A[MAX][MAX], B[MAX][MAX], C[MAX][MAX];
 
@@ -97,19 +97,20 @@ int main() {
             A[i][j] = (i + 1)*(j - 1);
         }
     }
-
+    
     cout << "Matrix A :\n";
     displayMatrix(A, n);
+    
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             B[i][j] = 2*i + (j + 1);
         }
     }
-
+    
     cout << "Matrix B :\n";
     displayMatrix(B, n);
 
-    initizializeZeros(C, n);
+    initializeZeros(C, n);
 
     // C = A*B
     matrixAddRecursive(A, B, C, n);
