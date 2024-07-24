@@ -1,7 +1,7 @@
 # Introduction-to-Algorithms
 
 ## Overview
-This repository is based on **_Introduction to Algorithms_** by **Thomas H. Cormen**, **Charles E. Leiserson**, **Ronald L. Rivest**, and **Clifford Stein**.
+This repository is based on **_Introduction to Algorithms_** by **Thomas H. Cormen**, **Charles E. Leiserson**, **Ronald L. Rivest**, and **Clifford Stein**, known as **CLRS**.
 
 The book consists of **6 main chapters**:
 1. Foundations
