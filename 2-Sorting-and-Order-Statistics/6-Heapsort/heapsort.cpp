@@ -2,8 +2,7 @@
 #include <vector>
 #include <cmath>
 
-void displayArray(std::vector<int> &vec)
-{
+void displayArray(std::vector<int> &vec) {
   for (int i = 0; i < vec.size(); ++i)
     std::cout << vec[i] << " ";
   std::cout << "\n\n";
