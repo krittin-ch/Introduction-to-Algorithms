@@ -54,14 +54,13 @@ void maxHeapify(std::vector<int> &vec, int i, int heap_size) {
         maxHeapify check only the root and its childrean
         Not all successive nodes
     */
-   
+
     int l = left(i);
     int r = right(i);
     int largest = i;
     // displayArray(vec);
-    // printTree(vec);
 
-    if (l < heap_size && vec[l] > vec[i]) {
+    if (l < heap_size && vec[l] > vec[largest]) {
         largest = l;
     }
     if (r < heap_size && vec[r] > vec[largest]) {
@@ -89,7 +88,7 @@ void minHeapify(std::vector<int> &vec, int i, int heap_size) {
     int r = right(i);
     int smallest = i;
 
-    if (l < heap_size && vec[l] < vec[i]) {
+    if (l < heap_size && vec[l] < vec[smallest]) {
         smallest = l;
     }
     if (r < heap_size && vec[r] < vec[smallest]) {
@@ -98,14 +97,19 @@ void minHeapify(std::vector<int> &vec, int i, int heap_size) {
 
     if (smallest != i) {
         swap_elements(&vec[i], &vec[smallest]);
-        minHeapify(vec, smallest, heap_size);
     }
+    minHeapify(vec, smallest, heap_size);
 }
 
 void buildHeap(std::vector<int> &vec, bool min_to_max) {
     /*
-
+        The `buildHeap` function satisfies the loop invariant at each iteration
+        by moving the largest values from the leaves up to the upper nodes. 
+        
+        The recursive calls in the maxHeapify function then move smaller 
+        values from the upper nodes down to the lower nodes.
     */
+
     int heap_size = vec.size();
 
     if (min_to_max) {
@@ -128,31 +132,30 @@ void heapSort(std::vector<int> &vec, bool min_to_max) {
         swap_elements(&vec[0], &vec[i]);
         --heap_size;                  
         maxHeapify(vec, 0, heap_size);
-        // displayArray(vec);
-        printTree(vec);
-   
         }
     } else {
         for (int i = vec.size() - 1; i > 0; --i) {
         swap_elements(&vec[0], &vec[i]);
         --heap_size;                  
         minHeapify(vec, 0, heap_size);
-        // displayArray(vec);
         }
     }
 }
 
 int main() {
     std::vector<int> vec = {27, 17, 3, 16, 13, 10, 1, 5, 7, 12, 4, 8, 9, 28};
+
     bool min_to_max = true;
    
     std::cout << "Original Array" << std::endl;
     displayArray(vec);
+    printTree(vec);
    
     buildHeap(vec, min_to_max);
    
     std::cout << "Heapified Array" << std::endl;
     displayArray(vec);
+    printTree(vec);
    
     heapSort(vec, min_to_max);
    
@@ -161,4 +164,3 @@ int main() {
 
     return 0;
 }
-
