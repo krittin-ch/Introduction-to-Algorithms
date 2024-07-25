@@ -101,6 +101,23 @@ class MaxHeap {
             maxHeapIncreaseKey(heap.size() - 1, key);
         }
 
+        int searchMaxHeap(int key) {
+            for(int i = 0; i < heap.size(); i++) {
+                if (heap[i] == key) {
+                    return i;
+                }
+
+                throw runtime_error("The Heap Does Not Contain the Key");
+            }
+        }
+
+        void maxHeapDelete(int key) {
+            int index = searchMaxHeap(key);
+            heap[index] = INT_MIN;
+            maxHeapify(index);
+            heap.pop_back();
+        }
+
         void printHeap() {
             int n = heap.size();
             if (n == 0) return;
@@ -152,5 +169,8 @@ int main() {
     cout << "Max-Heap : " << endl;
     heap1.printHeap();
 
+    heap1.maxHeapDelete(50);
+    cout << "Max-Heap : " << endl;
+    heap1.printHeap();
     return 0;
 }
