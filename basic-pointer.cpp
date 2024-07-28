@@ -30,7 +30,15 @@ int main() {
     // printf("Value pointed to by ptr: %d\n", *&x);
     print_values(&x);                                   // Pass the address of x to the function
 
-    // std::cout << *ptr1 << std::endl;
+    // std::cout << ptr1 << std::endl;
 
     return 0;
+
+    /*
+        Address of x: 000000f84abff9fc
+        Address stored in ptr: 000000f84abff9fc
+        Value of x: 5
+        Value pointed to by ptr: 5
+        Value pointed to by ptr: 5
+    */
 }
