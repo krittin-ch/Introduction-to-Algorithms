@@ -128,7 +128,7 @@ class DAryHeap {
                 int num = pow(dAry, depth);
                 while (num != 0 && i < heap.size()) {
                     cout << heap[i] << " ";
-                    if ((num + 2)%3 == 0) {
+                    if ((num + dAry - 1) % dAry == 0) {
                         // cout << "  " << num << "  "; 
                         cout << " | ";
                     }
@@ -150,22 +150,38 @@ class DAryHeap {
 int main() {
     // vector<int> vec = {9, 16, 3, 2, 4, 8, 5, 14, 12, 17, 42, 25, 6};
     vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+    int dAry = 5;
 
-    DAryHeap heap1(vec, 3);
+    DAryHeap heap1(vec, dAry);
 
+    cout << "Initial heap : " << endl;
     heap1.printHeap();
 
-    int maxi = heap1.maxHeapExtractionMax();
-    cout << "MAX : " << maxi << endl;
+    cout << "Extracting maximum element from heap : " << endl;
+    
+    int max_num = heap1.maxHeapExtractionMax();
+    cout << "MAX : " << max_num << endl;
+
+    cout << "Heap after extracting max : " << endl;
     heap1.printHeap();
 
+    cout << "Constructing sorted array : " << endl;
     heap1.constructSortedArray();
+    cout << "Heap after constructing sorted array : " << endl;
+    heap1.printHeap();
 
+    cout << "Displaying array representation of heap (sorted array) : " << endl;
     heap1.displayArray();
 
+    cout << "Rebuilding max heap : " << endl;
     heap1.buildMaxHeap();
+    cout << "Heap after rebuilding max heap : " << endl;
+    heap1.printHeap();
 
+    cout << "Final array representation of heap : " << endl;
     heap1.displayArray();
+    cout << "Final heap state : " << endl;
+    heap1.printHeap();
 
     return 0;
 }
