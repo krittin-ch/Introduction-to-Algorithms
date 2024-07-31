@@ -6,7 +6,6 @@ const int MAX = 50;
 
 class YoungTableau {
     private :
-
         vector<int> dim;    // dimension of young tableau
         vector<int> arr;    // inputs array to construct young tableau
         vector<vector<int>> y_tab;  // 2d young tableau
