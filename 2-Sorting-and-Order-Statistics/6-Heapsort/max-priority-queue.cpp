@@ -5,7 +5,6 @@ using namespace std;
 
 class MaxHeap {
     private :
-        
         vector<int> heap;
 
         int parent(int i) {
@@ -49,7 +48,6 @@ class MaxHeap {
         }
 
     public :
-
         MaxHeap(const vector<int> vec) : heap(vec) {
                 buildMaxHeap();
         }
