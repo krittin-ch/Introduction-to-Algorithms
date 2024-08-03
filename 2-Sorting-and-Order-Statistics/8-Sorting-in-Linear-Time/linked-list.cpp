@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// This implementation is required for bucket sort
 class Node {
     private:
         int data;
@@ -45,7 +46,7 @@ class LinkedList {
             while (current->getNext() != nullptr && current->getNext()->getData() < newNode->getData()) {
                 current = current->getNext();
             }
-            
+
             newNode->setNext(current->getNext());
             current->setNext(newNode);
 
