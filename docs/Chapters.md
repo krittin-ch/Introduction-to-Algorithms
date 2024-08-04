@@ -14,6 +14,10 @@ Chapter II : Sorting and Order Statistics
 - [Medians-and-Order-Statistics](/2-Sorting-and-Order-Statistics/9-Medians-and-Order-Statistics/)
 
 Chapter III : Data Structures
+- [Elementary Data Structures](/3-Data-Structures/1-Elementary-Data-Structures/)
+- Hash Tables
+- Binary Search Tree
+- Red-Black Tree
 
 Chapter IV : Advanced Design and Analysis Techniques
 
