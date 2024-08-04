@@ -31,6 +31,24 @@ class LinkedList {
             return headRef;
         }
 
+        Node* sortedMerge(Node* left, Node* right) {
+            if (left == nullptr) return right;
+            if (right == nullptr) return left;
+
+            Node* result = nullptr;
+            
+            if (left->data < right->data) {
+                result = left;
+                result->next = sortedMerge(left->next, right);
+            } else {
+                result = right;
+                result->next = sortedMerge(left, right->next);
+            }
+
+            return result;
+
+        }
+
     public :
         LinkedList() : head(nullptr) {}
 
@@ -48,6 +66,59 @@ class LinkedList {
                 temp = temp->next;
             }
             cout << endl;
+        }
+
+        void split(Node* source, Node** frontRef, Node** backRef) {
+            Node* slow = source;
+            Node* fast = source->next;
+
+            while (fast != nullptr) {
+                fast = fast->next;
+                if (fast != nullptr) {
+                    fast = fast->next;
+                    slow = slow->next;
+                }
+            }
+
+            *frontRef = source;
+            *backRef = slow->next;
+            slow->next = nullptr;
+        }
+
+        void split_v2(Node* source, Node* &frontRef, Node* &backRef) {
+            Node* slow = source;
+            Node* fast = source->next;
+
+            while (fast != nullptr) {
+                fast = fast->next;
+                if (fast != nullptr) {
+                    fast = fast->next;
+                    slow = slow->next;
+                }
+            }
+
+            frontRef = source;
+            backRef = slow->next;
+            slow->next = nullptr;
+        }
+
+        Node* merging(Node* headRef) {
+            if (headRef == nullptr || headRef ->next == nullptr) {
+                return headRef;
+            }
+
+            Node* front = nullptr;
+            Node* back = nullptr;
+            split(headRef, &front, &back);
+
+            front = merging(front);
+            back = merging(back);
+
+            return sortedMerge(front, back);
+        }
+
+        void mergeSort() {
+            head = merging(head);
         }
 
         void insertionSort() {
@@ -97,13 +168,35 @@ void bucketSort(vector<float> &vec) {
     }
 }
 
+void bucketSortWithMergeSort(vector<float> vec) {
+    vector<LinkedList> bucket(10);
+
+    for (float num : vec) {
+        int index = 10 * num;
+        bucket[index].insert(num);
+    }
+
+    cout << "Original Bucket : ";
+    bucket[1].displayLinkedList();
+
+    for (LinkedList &ls : bucket) {
+        ls.mergeSort();
+        ls.copyToVector(vec);
+    }
+
+    cout << "Sorted Bucket : ";
+    bucket[1].displayLinkedList();
+}
+
 int main() {
-    vector<float> vec = {0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68};
+    vector<float> vec = {0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68, 0.19};
 
     cout << "Original Array : " << endl;
     displayArray(vec);
 
-    bucketSort(vec);
+    // bucketSort(vec);
+    cout << endl << endl;
+    bucketSortWithMergeSort(vec);
     cout << "Sorted Array : " << endl;
     displayArray(vec);
 
