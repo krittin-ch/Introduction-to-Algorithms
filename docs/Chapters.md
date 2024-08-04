@@ -2,12 +2,16 @@
 
 Chapter I : Foundations
 - The Role of Algorithms in Computing
-- Getting Started
+- [Getting Started](/1-Foundations/2-Getting-Started/)
 - Characterizing Running Times
-- Divide-and-Conquer
-- Probabilistic Analysis and Randomized Algorithms   
+- [Divide-and-Conquer](/1-Foundations/4-Divide-and-Conquer/)
+- [Probabilistic Analysis and Randomized Algorithms](/1-Foundations/5-Probabilistic-Analysis-and-Randomized-Algorithms/)
 
 Chapter II : Sorting and Order Statistics
+- [Heapsort](/2-Sorting-and-Order-Statistics/6-Heapsort/)
+- [Quicksort](/2-Sorting-and-Order-Statistics/7-Quicksort/)
+- [Sorting-in-Linear-Time](/2-Sorting-and-Order-Statistics/8-Sorting-in-Linear-Time/)
+- [Medians-and-Order-Statistics](/2-Sorting-and-Order-Statistics/9-Medians-and-Order-Statistics/)
 
 Chapter III : Data Structures
 
