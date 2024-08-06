@@ -2,6 +2,23 @@
 
 using namespace std;
 
+/*
+    Column Sorting Algorithm is divided into 8 steps
+    
+    1.  Sort each column.
+    2.  Transpose the matrix and reshape it back to the same dimension by turning the leftmost column into a new row.
+    3.  Sort each column.
+    4.  Perform the inverse of the permutaiton performed in step 2.
+    5.  Sort each column.
+    6.  Shift the top half of each column into the bottom half of the same column, 
+        and shift the bottom half of each column into the top half of the next column to theright.
+        Leave the top half of the leftmost column empty (zeros). 
+        Shift the bottom half of the last column into the top half of a new rightmost column, 
+        and leave the bottom half of this new column empty (INF).
+    7.  Sort each column.
+    8.  Perform the inverse of the permutaiton performed in step 6.
+*/
+
 void displayMatrix(vector<vector<int>> vec) {
     for (vector<int> sub_vec: vec) {
         for (int num : sub_vec) {
@@ -108,23 +125,37 @@ void inverseTranspose(vector<vector<int>> &vec) {
 
 // Step 6
 void shiftAndColumnSort(vector<vector<int>> &vec) {
-    vector<vector<int>> vec_n(vec.size(), vector<int>(vec.size() + 1));
-
-    for (int i = 0; i < vec_n.size() / 2; i++) {
-        vec_n[i][0] = 0;
-        vec_n[vec_n.size() - i][vec_n[0].size() - 1] = INT_MAX;
-    }
-
-    for (int i = 0; i < vec_n.size(); i++) {
-        for (int j = 0; j < vec_n[0].size(); j++) {
-            vec_n[i][j] = 10;
+    vector<vector<int>> vec_n(vec.size(), vector<int>(vec[0].size() + 1));
+    
+    for (int i = 0; i < vec.size(); i++) {
+        for (int j = 0; j < vec[0].size(); j++) {
+            if (i <= 2) {
+                vec_n[i][j + 1] = vec[i + vec.size() / 2][j];
+            } else {
+                vec_n[i][j] = vec[i - vec.size() / 2][j];
+            }
         }
     }
 
-    displayMatrix(vec_n);
+    for (int i = 0; i < vec_n.size() / 2; i++) {
+        vec_n[i][0] = 0;
+        vec_n[(vec_n.size() - 1) - i][vec_n[0].size() - 1] = INT_MAX;
+    }
+
+    columnSort(vec_n);
+
+    for (int i = 0; i < vec.size(); i++) {
+        for (int j = 0; j < vec[0].size(); j++) {
+            if (i <= 2) {
+                vec[i + vec.size() / 2][j] = vec_n[i][j + 1];
+            } else {
+                vec[i - vec.size() / 2][j] = vec_n[i][j];
+            }
+        }
+    }
 }
 
-vector<vector<int>> completeColumnSort(vector<vector<int>> &vec) {
+void completeColumnSort(vector<vector<int>> &vec) {
     
     cout << "Original Matrix : " << endl;
     displayMatrix(vec);
@@ -151,24 +182,28 @@ vector<vector<int>> completeColumnSort(vector<vector<int>> &vec) {
     displayMatrix(vec);
 
     shiftAndColumnSort(vec);
-
-    return vec;
 }
 
 int main() {
-    int r = 6;
-    int s = 3;
 
-    // vector<vector<int>> vec(r, vector<int>(s));
+    // vector<vector<int>> vec = {
+    //     {10, 14, 5},
+    //     {8, 7, 17},
+    //     {12, 1, 6},
+    //     {16, 9, 11},
+    //     {4, 15, 2},
+    //     {18, 3, 13}
+    // };
 
     vector<vector<int>> vec = {
-        {10, 14, 5},
-        {8, 7, 17},
-        {12, 1, 6},
-        {16, 9, 11},
+        {1, 14, 5},
+        {11, 4, 17},
+        {12, 10, 6},
+        {16, 9, 3},
         {4, 15, 2},
-        {18, 3, 13}
+        {18, 8, 13}
     };
+
 
     if (!checkDimension(vec)) {
         cout << "Error Dimension";
@@ -176,6 +211,9 @@ int main() {
     }
 
     completeColumnSort(vec);
+
+    cout << "Final Sorted Matrix : " << endl;
+    displayMatrix(vec);
 
     return 0;
 }
