@@ -10,6 +10,18 @@ void displayArray(vector<int> vec) {
     cout << endl;
 }
 
+/*
+    With divide-and-conquer algorithm
+
+    T(n) = T(n/2) + n/2 + 1
+
+    T(n/2)  : the size of subproblems
+    n/2     : n/2 comparisons * O(1)
+    1       : combing result time
+
+    T(n) = n + ceil(lg 2) - 2
+*/
+
 vector<int> secondSmallest(vector<int> vec) {
     if (vec.size() <= 2) {
         sort(vec.begin(), vec.end());
