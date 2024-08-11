@@ -9,8 +9,8 @@ void displayArray(vector<int> vec) {
     cout << endl;
 }
 
-void insertionSort(vector<int> &vec, int start, int step) {
-    for (int i = 1; i <= 4; i++) {
+void insertionSort(vector<int> &vec, int start, int step, int length) {
+    for (int i = 1; i < length; i++) {
         int key = vec[start + step * i];
         int j = i - 1;
 
@@ -23,22 +23,18 @@ void insertionSort(vector<int> &vec, int start, int step) {
 }
 
 int partitionAround(vector<int> &vec, int p, int r, int x) {
-    int idx = 0;
-
-    while (vec[idx] != x) {
+    int idx = p;
+    while (vec[idx] != x && idx <= r) {
         idx++;
     }
 
     swap(vec[idx], vec[r]);
 
     int i = p - 1;
-    int j = p;
-
-    while (j < r) {
+    for (int j = p; j < r; j++) {
         if (vec[j] < x) {
             swap(vec[++i], vec[j]);
         }
-        j++;
     }
 
     swap(vec[++i], vec[r]);
@@ -47,28 +43,27 @@ int partitionAround(vector<int> &vec, int p, int r, int x) {
 }
 
 int select(vector<int> &vec, int p, int r, int i) {
-    i--;
-    while ((r - p) % 5 != 0) {
-        for (int j = p + 1; j < r; j++) {
-            if (vec[p] > vec[j]) {
-                swap(vec[p], vec[j]);
-            }
-        }
-
-        if (i == 0) return vec[p];
-
-        p++;
-        i--;
-    }
-    
-    int g = (r - p) / 5;
-    for (int j = p; j < p + g - 1; j++) {
-        insertionSort(vec, j, g);
+    if (p == r) {
+        return vec[p];
     }
 
-    int x = select(vec, p + 2*g, p + 3*g - 1, ceil(g/2));
-    int q  = partitionAround(vec, p, r, x);
+    // Partition vec into groups of 5 and sort each group
+    int n = r - p + 1;
+    int g = (n + 4) / 5; // Number of groups, ceil division
+    vector<int> medians(g);
 
+    for (int j = 0; j < g; j++) {
+        int start = p + j * 5;
+        int length = min(5, n - j * 5);
+        insertionSort(vec, start, 1, length);
+        medians[j] = vec[start + length / 2];
+    }
+
+    // medOfMed is a median of each 5-element group of A[j + p] for j = p to p + g
+    // which are vec[p + 2*g], vec[p + 1 + 2*g], ..., vec[p + (g - 1) + 2*g]
+    int medOfMed = (g == 1) ? medians[0] : select(medians, 0, g - 1, g / 2);
+
+    int q = partitionAround(vec, p, r, medOfMed);
     int k = q - p + 1;
 
     if (i == k) {
@@ -78,13 +73,12 @@ int select(vector<int> &vec, int p, int r, int i) {
     } else {
         return select(vec, q + 1, r, i - k);
     }
-
 }
 
 int main() {
     vector<int> vec = {4, 3, 2, 6, 1, 5, 10, 8, 7, 9};
     
-    int order = 4;
+    int order = 3;
 
     int num = select(vec, 0, vec.size() - 1, order);
 
