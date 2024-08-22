@@ -76,8 +76,34 @@ class BinaryTree {
             displayPreOrderTraversal(root->right);
         }
 
+        void displayPreOrderTraversalIterative(Node* root) {
+            if (root == nullptr) {
+                return;
+            }
+
+            stack<Node*> nodeStack;
+            nodeStack.push(root);
+
+            while (!nodeStack.empty()) {
+                Node* currentNode = nodeStack.top();
+                nodeStack.pop();
+
+                cout << currentNode->data << " ";
+
+                // Push right child first so that left child is processed first
+                if (currentNode->right) {
+                    nodeStack.push(currentNode->right);
+                }
+                if (currentNode->left) {
+                    nodeStack.push(currentNode->left);
+                }
+            }
+        }
+
         void display() {
             displayPreOrderTraversal(root);
+            cout << endl;
+            displayPreOrderTraversalIterative(root);
             cout << endl;
         }
 };
@@ -87,10 +113,10 @@ int main() {
 
     for (int i = 0; i < 10; i++) {
         bt.insert(i);
-        bt.display();
+        // bt.display();
     }
 
-    // bt.display();
+    bt.display();
     return 0;
 }
 
