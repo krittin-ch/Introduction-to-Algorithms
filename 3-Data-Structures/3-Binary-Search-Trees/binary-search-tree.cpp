@@ -44,10 +44,16 @@ class BST {
             }
         }
 
+        void RecursiveTreeInsert(Node* T, int val) {
+            if (val < T->data) {
+                RecursiveTreeInsert(T->left, val);
+            }
+        }
+
         Node* TreeSearch(Node* T, int val) {
             Node* x = T;
 
-            if (x != nullptr || x->data != val) {
+            if (x == nullptr || x->data == val) {
                 return x;
             }
 
@@ -92,8 +98,8 @@ class BST {
             return x;
         }
 
-        Node* TreeSuccessor() {
-            Node* x = root;
+        Node* TreeSuccessor(Node* T) {
+            Node* x = T;
 
             if (x->right != nullptr) {
                 return TreeMinimum(x->right);
@@ -109,24 +115,51 @@ class BST {
             }
         }
 
-        // void Transplant(Node* &T, Node* &u, Node* &v) {
-        //     if (u->parent == nullptr) {
-        //         T = v;
-        //     } else if (u == u->parent->left) {
-        //         u->parent->left = v;
-        //     } else {
-        //         u->parent->right = v;
-        //     }
+        void Transplant(Node* &u, Node* &v) {
+            if (u->parent == nullptr) {
+                root = v;
+            } else if (u == u->parent->left) {
+                u->parent->left = v;
+            } else {
+                u->parent->right = v;
+            }
 
-        //     if (v != nullptr) {
-        //         v->parent = u->parent;
-        //     }
-        // }
+            if (v != nullptr) {
+                v->parent = u->parent;
+            }
+        }
 
-        // void TreeDeletion(Node* &T, int val) {
-        //     Node* z = new Node(val);
-        //     if (z->left)
-        // }
+        void TreeDeletion(int val) {
+            Node* z = TreeSearch(root, val);
+            if (z == nullptr) {
+                cout << "Value not found in the tree.\n";
+                return;
+            }
+
+            // Case 1: No left child
+            if (z->left == nullptr) {
+                Transplant(z, z->right);
+            }
+            // Case 2: No right child
+            else if (z->right == nullptr) {
+                Transplant(z, z->left);
+            }
+            // Case 3: Two children
+            else {
+                Node* y = TreeMinimum(z->right);
+                if (y->parent != z) {
+                    Transplant(y, y->right);
+                    y->right = z->right;   // Use assignment operator
+                    y->right->parent = y;
+                }
+                Transplant(z, y);
+                y->left = z->left;
+                y->left->parent = y;
+            }
+
+            delete z;  // Don't forget to delete the removed node
+        }
+
 
         void PreorderTreeWalk(Node* T) {
             Node* x = T;
@@ -190,8 +223,16 @@ class BST {
                     }
                 }
             }
-
             return res;
+        }
+
+        void AlternativeInorderTreeWalk() {
+            Node* x = TreeMinimum(root);
+
+            while (x != nullptr) {
+                cout << x->data << " ";
+                x = TreeSuccessor(x);
+            }
         }
 
         void displayMorris() {
@@ -223,6 +264,8 @@ class BST {
                 InorderTreeWalkWithStack();
             } else if (type == 4) {
                 displayMorris();
+            } else if (type == 5) {
+                AlternativeInorderTreeWalk();
             }
 
             cout << endl << endl;
@@ -241,14 +284,20 @@ int main() {
 
     cout << "Preorder Traversal : ";
     tree.displayTree(0);
-    cout << "Inorder Traversal : ";
-    tree.displayTree(1);
     cout << "Postorder Traversal : ";
     tree.displayTree(2);
+    cout << "Inorder Traversal : ";
+    tree.displayTree(1);
     cout << "Inorder Traversal with Stack: ";
     tree.displayTree(3);
     cout << "Morris Traversal: ";
-    tree.displayTree(4);
-    
+    tree.displayTree(4);   
+    cout << "Alternative Inorder Traversal: ";
+    tree.displayTree(5);
+
+    tree.TreeDeletion(13);
+    cout << "Delete 13: ";
+    tree.displayTree(5);
+
     return 0;
 }
