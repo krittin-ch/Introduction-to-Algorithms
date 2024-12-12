@@ -148,6 +148,60 @@ class BST {
             }
         }
 
+        void InorderTreeWalkWithStack() {
+            stack<Node*> stk;
+            Node* x  = root;
+
+            while (x != nullptr || stk.empty() == false) {
+                while (x != nullptr) {
+                    stk.push(x);
+                    x = x->left;
+                }
+
+                x = stk.top();
+                stk.pop();
+                cout << x->data << " ";
+
+                x = x->right;                
+            }
+        }
+
+        vector<int> MorrisTraversal() {    // using 2 pointers
+            vector<int> res;
+            Node* curr  = root;
+
+            while (curr != nullptr) {
+                if (curr->left == nullptr) {
+                    res.push_back(curr->data);
+                    curr = curr->right;
+                } else {
+                    Node* prev = curr->left;
+                    while (prev->right != nullptr && prev->right != curr) {
+                        prev = prev->right;
+                    }
+
+                    if (prev->right == nullptr) {
+                        prev->right = curr;
+                        curr = curr->left;
+                    } else {
+                        prev->right = nullptr;
+                        res.push_back(curr->data);
+                        curr = curr->right;
+                    }
+                }
+            }
+
+            return res;
+        }
+
+        void displayMorris() {
+            vector<int> seq = MorrisTraversal();
+
+            for (int num : seq) {
+                cout << num << " ";
+            }
+        }
+
         void PostorderTreeWalk(Node* T) {
             Node* x = T;
 
@@ -159,13 +213,18 @@ class BST {
         }
 
         void displayTree(int type) {
-            if (type < 0) {
+            if (type == 0) {
                 PreorderTreeWalk(root);
-            } else if (type == 0) {
+            } else if (type == 1) {
                 InorderTreeWalk(root);
-            } else {
+            } else if (type == 2) {
                 PostorderTreeWalk(root);
+            } else if (type == 3) {
+                InorderTreeWalkWithStack();
+            } else if (type == 4) {
+                displayMorris();
             }
+
             cout << endl << endl;
         }
 
@@ -181,11 +240,15 @@ int main() {
     }
 
     cout << "Preorder Traversal : ";
-    tree.displayTree(-1);
-    cout << "Inorder Traversal : ";
     tree.displayTree(0);
-    cout << "Postorder Traversal : ";
+    cout << "Inorder Traversal : ";
     tree.displayTree(1);
+    cout << "Postorder Traversal : ";
+    tree.displayTree(2);
+    cout << "Inorder Traversal with Stack: ";
+    tree.displayTree(3);
+    cout << "Morris Traversal: ";
+    tree.displayTree(4);
     
     return 0;
 }
