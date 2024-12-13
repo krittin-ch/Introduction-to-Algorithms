@@ -3,11 +3,11 @@
 using namespace std;
 
 class Node {
-    private :
+    private:
         float data;
         Node* next;
     
-    public :
+    public:
         Node(float val) {
             data = val;
             next = nullptr;
@@ -31,7 +31,7 @@ class Node {
 };
 
 class LinkedList {
-    private :
+    private:
         Node* head;
 
         void split(Node* source, Node* &frontRef, Node* &backRef) {
@@ -128,7 +128,7 @@ class LinkedList {
             return merge(front, back);
         }
 
-    public :
+    public:
         LinkedList() : head(nullptr) {};
 
         void insert(float val) {

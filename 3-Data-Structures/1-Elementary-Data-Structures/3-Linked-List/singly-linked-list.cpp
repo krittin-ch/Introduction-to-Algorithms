@@ -3,11 +3,11 @@
 using namespace std;
 
 class Node {
-    private :
+    private:
         int data;
         Node* next;
 
-    public :
+    public:
         Node(int val) : data(val), next(nullptr) {};
 
         int getData() const {
@@ -33,7 +33,7 @@ struct SearchResult {
 };
 
 class SinglyLinkedList {
-    private :
+    private:
         Node* head;
 
         bool contains(int val) const {
@@ -47,7 +47,7 @@ class SinglyLinkedList {
             return false;
         }
 
-    public :
+    public:
         SinglyLinkedList() : head(nullptr) {};
 
         void prepend(int val) {

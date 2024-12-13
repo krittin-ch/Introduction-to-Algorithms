@@ -3,12 +3,12 @@
 using namespace std;
 
 class Stack {
-    private :
+    private:
         static const int MAX_SIZE = 10;
         int stk_arr[MAX_SIZE];
         int topIndex;
 
-    public :
+    public:
         Stack() : topIndex(-1) {}
 
         bool stackEmpty() {
@@ -50,10 +50,10 @@ class Stack {
 };
 
 class StackVector {
-    private :
+    private:
         vector<int> stk_vec;
 
-    public :
+    public:
         StackVector() {}
 
         void push(int val) {
@@ -81,7 +81,7 @@ class StackVector {
 };
 
 class Node {
-    public :
+    public:
         int val;
         Node* next;
 
@@ -89,10 +89,10 @@ class Node {
 };
 
 class StackLinkedList {
-    private :
+    private:
         Node* head;
 
-    public :
+    public:
         StackLinkedList() : head(nullptr) {};
 
         bool stackEmpty() {

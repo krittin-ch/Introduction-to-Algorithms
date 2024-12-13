@@ -3,7 +3,7 @@
 using namespace std;
 
 class QueueWith2Stacks {
-    private :
+    private:
         stack<int> stk_in;
         stack<int> stk_out;
 
@@ -21,7 +21,7 @@ class QueueWith2Stacks {
             }
         }
 
-    public :
+    public:
         QueueWith2Stacks() {}
 
         void enqueue(int val) {

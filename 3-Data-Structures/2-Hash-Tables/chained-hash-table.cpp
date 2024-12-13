@@ -12,10 +12,10 @@ struct Node {
 };
 
 class DoubleLinkedList {
-    private :
+    private:
         Node* head;
     
-    public :
+    public:
         DoubleLinkedList() : head(nullptr) {};
 
         void prepend(int key, int val) {
@@ -87,11 +87,11 @@ class DoubleLinkedList {
 };
 
 class ChainedHashTable {
-    private :
+    private:
         static const int MAX = 10;
         vector<DoubleLinkedList> vec;
 
-    public :
+    public:
         ChainedHashTable() : vec(MAX) {};
 
         int keyToIndex(int key) {

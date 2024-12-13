@@ -5,11 +5,11 @@ using namespace std;
 const int MAX = 1000;
 
 class DirectAddressTable {
-    private :
+    private:
         vector<int> T;
         int capacity;
 
-    public :
+    public:
         DirectAddressTable(int maxKey) {
             capacity = maxKey + 1;
             T.resize(capacity, MAX);

@@ -3,7 +3,7 @@
 using namespace std;
 
 class BinaryMatrix {
-    private :
+    private:
         // vector input of size 4
         static const int MAX_SIZE = 4;
         vector<int> vec;
@@ -28,7 +28,7 @@ class BinaryMatrix {
         }
 
 
-    public :
+    public:
         BinaryMatrix(vector<int> values, int numRows, int numCols) 
         : vec(values), rows(numRows), cols(numCols), numEle(numRows * numCols) {
             constructBinaryMatrix();

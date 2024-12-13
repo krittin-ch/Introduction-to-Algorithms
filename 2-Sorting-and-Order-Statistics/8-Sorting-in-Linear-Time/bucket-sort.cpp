@@ -10,7 +10,7 @@ struct Node {
 };
 
 class LinkedList {
-    private :
+    private:
         Node* head; 
 
         Node* sortedInsertion(Node* headRef, Node* newNode) {
@@ -49,7 +49,7 @@ class LinkedList {
 
         }
 
-    public :
+    public:
         LinkedList() : head(nullptr) {}
 
         void insert(float val) {

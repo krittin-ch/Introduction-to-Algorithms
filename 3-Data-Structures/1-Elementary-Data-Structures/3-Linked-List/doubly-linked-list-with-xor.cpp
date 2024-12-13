@@ -18,14 +18,14 @@ struct SearchResult {
 };
 
 class DoublyLinkedListWithXOR {
-    private :
+    private:
         Node* head;
 
         Node* XOR(Node* a, Node* b) {
             return reinterpret_cast<Node*>(reinterpret_cast<uintptr_t>(a) ^ reinterpret_cast<uintptr_t>(b));
         }
 
-    public :
+    public:
         DoublyLinkedListWithXOR() : head(nullptr) {};
 
         Node* getNext(Node* prev, Node* curr) {

@@ -17,10 +17,10 @@ struct searchResult {
 };
 
 class BinaryTree {
-    private :
+    private:
         Node* root;
     
-    public :
+    public:
         BinaryTree() : root(nullptr) {};
 
         // return a parent node containing only one or no child

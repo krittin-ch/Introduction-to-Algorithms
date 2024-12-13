@@ -3,7 +3,7 @@
 using namespace std;
 
 class Stack_2In1 {
-    private :
+    private:
         static const int MAX_SIZE = 20;
         int arr[MAX_SIZE];
         
@@ -13,7 +13,7 @@ class Stack_2In1 {
         int stk_2_top = MAX_SIZE;
         int stk_2_bottom = MAX_SIZE - 1;
 
-    public :
+    public:
         Stack_2In1() {};
 
         bool isFull() {

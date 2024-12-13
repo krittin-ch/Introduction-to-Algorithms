@@ -12,10 +12,10 @@ struct Node {
 };
 
 class BST {
-    private :
+    private:
         Node* root;
 
-    public :
+    public:
         BST(): root(nullptr) {};
 
         void TreeInsert(int val) {

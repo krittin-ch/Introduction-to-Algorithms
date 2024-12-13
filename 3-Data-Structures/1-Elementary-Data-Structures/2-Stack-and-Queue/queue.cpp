@@ -3,14 +3,14 @@
 using namespace std;
 
 class Queue {
-    private :
+    private:
         static const int MAX_SIZE = 10;
         int queue[MAX_SIZE];
         
         int headIdx;
         int tailIdx;
     
-    public :
+    public:
         Queue() : headIdx(0), tailIdx(-1) {};
 
         int incrementIdx(int Idx) {

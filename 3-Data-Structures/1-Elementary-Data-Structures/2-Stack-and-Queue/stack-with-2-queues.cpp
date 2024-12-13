@@ -3,11 +3,11 @@
 using namespace std;
 
 class Stackwith2Queues {
-    private :
+    private:
         queue<int> queue_1;
         queue<int> queue_2;
 
-    public :
+    public:
         Stackwith2Queues() {}
 
         void push(int val) {

@@ -14,10 +14,10 @@ struct Node
 
 // Circular, Doubly Linked List with a Sentinel (null node)
 class DoublyLinkedListWithSentinel {
-    private :
+    private:
         Node* sentinel;
 
-    public : 
+    public: 
         DoublyLinkedListWithSentinel() {
             sentinel = new Node(-1);
             sentinel->next = sentinel;

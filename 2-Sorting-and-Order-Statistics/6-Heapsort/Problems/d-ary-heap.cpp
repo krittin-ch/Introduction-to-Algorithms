@@ -3,7 +3,7 @@
 using namespace std;
 
 class DAryHeap {
-    private :
+    private:
         vector<int> heap;
         int dAry;   // If dAry is 2, then it is a binary heap.
 
@@ -43,7 +43,7 @@ class DAryHeap {
             return ceil(log2(a) / log2(b));
         }
     
-    public : 
+    public: 
         void buildMaxHeap() {
             int heap_size = heap.size();
             for (int i = parent(heap.size()); i >= 0; i--) {

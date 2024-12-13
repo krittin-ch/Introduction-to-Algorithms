@@ -3,7 +3,7 @@
 using namespace std;
 
 class MinHeap {
-    private :
+    private:
         vector<int> heap;
 
         int parent(int i) {
@@ -44,7 +44,7 @@ class MinHeap {
             }
         }
 
-    public :
+    public:
         MinHeap(const vector<int> vec) {
             heap = vec;
             buildMinHeapify();

@@ -3,11 +3,11 @@
 using namespace std;
 
 class Deque {
-    private :
+    private:
         stack<int> stk;
         queue<int> que;
 
-    public :
+    public:
         Deque() {};
 
         void push_front(int val) {

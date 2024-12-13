@@ -11,10 +11,10 @@ struct Node {
 };
 
 class DoublyLinkedList {
-    private :
+    private:
         Node* head;
 
-    public :
+    public:
         DoublyLinkedList() : head(nullptr) {};
 
         void prepend(int val) {
