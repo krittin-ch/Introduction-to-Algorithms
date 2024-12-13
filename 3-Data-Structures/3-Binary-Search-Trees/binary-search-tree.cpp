@@ -44,10 +44,29 @@ class BST {
             }
         }
 
-        void RecursiveTreeInsert(Node* T, int val) {
-            if (val < T->data) {
-                RecursiveTreeInsert(T->left, val);
+        void RecursiveInsert(Node*& T, int val) {
+            if (T == nullptr) {
+                T = new Node(val);
+                return;
             }
+
+            if (val < T->data) {
+                RecursiveInsert(T->left, val);
+                if (T->left != nullptr) {
+                    T->left->parent = T;
+                }
+            } else {
+                RecursiveInsert(T->right, val);
+                if (T->right != nullptr) {
+                    T->right->parent = T;
+                }
+            }
+
+            return;
+        }
+
+        void RecursiveTreeInsert(int val) {
+            RecursiveInsert(root, val);
         }
 
         Node* TreeSearch(Node* T, int val) {
@@ -279,7 +298,8 @@ int main() {
     vector<int> vec = {20, 10, 26, 4, 18, 24, 27, 14, 19, 13, 15};
 
     for (int i : vec) {
-        tree.TreeInsert(i);
+        // tree.TreeInsert(i);
+        tree.RecursiveTreeInsert(i);
     }
 
     cout << "Preorder Traversal : ";
