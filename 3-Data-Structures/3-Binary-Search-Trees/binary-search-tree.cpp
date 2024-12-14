@@ -18,7 +18,7 @@ class BST {
     public:
         BST(): root(nullptr) {};
 
-        void TreeInsert(int val) {
+        void treeInsert(int val) {
             Node* newNode = new Node(val);
             Node* x = root;     // node being compared with `newNode`
             Node* y = nullptr;  // `y` will be parent of `newNode`
@@ -44,19 +44,19 @@ class BST {
             }
         }
 
-        void RecursiveInsert(Node*& T, int val) {
+        void recursiveInsert(Node*& T, int val) {
             if (T == nullptr) {
                 T = new Node(val);
                 return;
             }
 
             if (val < T->data) {
-                RecursiveInsert(T->left, val);
+                recursiveInsert(T->left, val);
                 if (T->left != nullptr) {
                     T->left->parent = T;
                 }
             } else {
-                RecursiveInsert(T->right, val);
+                recursiveInsert(T->right, val);
                 if (T->right != nullptr) {
                     T->right->parent = T;
                 }
@@ -65,11 +65,11 @@ class BST {
             return;
         }
 
-        void RecursiveTreeInsert(int val) {
-            RecursiveInsert(root, val);
+        void recursiveTreeInsert(int val) {
+            recursiveInsert(root, val);
         }
 
-        Node* TreeSearch(Node* T, int val) {
+        Node* treeSearch(Node* T, int val) {
             Node* x = T;
 
             if (x == nullptr || x->data == val) {
@@ -77,13 +77,13 @@ class BST {
             }
 
             if (val < x->data) {
-                return TreeSearch(T->left, val);
+                return treeSearch(T->left, val);
             } else {
-                return TreeSearch(T->right, val);
+                return treeSearch(T->right, val);
             }
         }
 
-        Node* IterativeTreeSearch(Node* T, int val) {
+        Node* iterativeTreeSearch(Node* T, int val) {
             Node* x = T;
             
             while (x != nullptr && val != x->data) {
@@ -97,7 +97,7 @@ class BST {
             return x;
         }
 
-        Node* TreeMinimum(Node* T) {
+        Node* treeMinimum(Node* T) {
             Node* x = T;
 
             while (x->left != nullptr) {
@@ -107,7 +107,7 @@ class BST {
             return x;
         }
 
-        Node* TreeMaximum(Node* T) {
+        Node* treeMaximum(Node* T) {
             Node* x = T;
 
             while (x->right != nullptr) {
@@ -117,11 +117,11 @@ class BST {
             return x;
         }
 
-        Node* TreeSuccessor(Node* T) {
+        Node* treeSuccessor(Node* T) {
             Node* x = T;
 
             if (x->right != nullptr) {
-                return TreeMinimum(x->right);
+                return treeMinimum(x->right);
             } else {
                 Node* y = x->parent;
 
@@ -134,7 +134,7 @@ class BST {
             }
         }
 
-        void Transplant(Node* &u, Node* &v) {
+        void transplant(Node* &u, Node* &v) {
             if (u->parent == nullptr) {
                 root = v;
             } else if (u == u->parent->left) {
@@ -148,8 +148,8 @@ class BST {
             }
         }
 
-        void TreeDeletion(int val) {
-            Node* z = TreeSearch(root, val);
+        void treeDeletion(int val) {
+            Node* z = treeSearch(root, val);
             if (z == nullptr) {
                 cout << "Value not found in the tree.\n";
                 return;
@@ -157,21 +157,21 @@ class BST {
 
             // Case 1: No left child
             if (z->left == nullptr) {
-                Transplant(z, z->right);
+                transplant(z, z->right);
             }
             // Case 2: No right child
             else if (z->right == nullptr) {
-                Transplant(z, z->left);
+                transplant(z, z->left);
             }
             // Case 3: Two children
             else {
-                Node* y = TreeMinimum(z->right);
+                Node* y = treeMinimum(z->right);
                 if (y->parent != z) {
-                    Transplant(y, y->right);
+                    transplant(y, y->right);
                     y->right = z->right;   // Use assignment operator
                     y->right->parent = y;
                 }
-                Transplant(z, y);
+                transplant(z, y);
                 y->left = z->left;
                 y->left->parent = y;
             }
@@ -180,27 +180,27 @@ class BST {
         }
 
 
-        void PreorderTreeWalk(Node* T) {
+        void preorderTreeWalk(Node* T) {
             Node* x = T;
 
             if (x != nullptr) {
                 cout << x->data << " ";
-                PreorderTreeWalk(x->left);
-                PreorderTreeWalk(x->right);
+                preorderTreeWalk(x->left);
+                preorderTreeWalk(x->right);
             }
         }
 
-        void InorderTreeWalk(Node* T) {
+        void inorderTreeWalk(Node* T) {
             Node* x = T;
 
             if (x != nullptr) {
-                InorderTreeWalk(x->left);
+                inorderTreeWalk(x->left);
                 cout << x->data << " ";
-                InorderTreeWalk(x->right);
+                inorderTreeWalk(x->right);
             }
         }
 
-        void InorderTreeWalkWithStack() {
+        void inorderTreeWalkWithStack() {
             stack<Node*> stk;
             Node* x  = root;
 
@@ -245,12 +245,12 @@ class BST {
             return res;
         }
 
-        void AlternativeInorderTreeWalk() {
-            Node* x = TreeMinimum(root);
+        void alternativeInorderTreeWalk() {
+            Node* x = treeMinimum(root);
 
             while (x != nullptr) {
                 cout << x->data << " ";
-                x = TreeSuccessor(x);
+                x = treeSuccessor(x);
             }
         }
 
@@ -262,29 +262,29 @@ class BST {
             }
         }
 
-        void PostorderTreeWalk(Node* T) {
+        void postorderTreeWalk(Node* T) {
             Node* x = T;
 
             if (x != nullptr) {
-                PostorderTreeWalk(x->left);
-                PostorderTreeWalk(x->right);
+                postorderTreeWalk(x->left);
+                postorderTreeWalk(x->right);
                 cout << x->data << " ";
             }
         }
 
         void displayTree(int type) {
             if (type == 0) {
-                PreorderTreeWalk(root);
+                preorderTreeWalk(root);
             } else if (type == 1) {
-                InorderTreeWalk(root);
+                inorderTreeWalk(root);
             } else if (type == 2) {
-                PostorderTreeWalk(root);
+                postorderTreeWalk(root);
             } else if (type == 3) {
-                InorderTreeWalkWithStack();
+                inorderTreeWalkWithStack();
             } else if (type == 4) {
                 displayMorris();
             } else if (type == 5) {
-                AlternativeInorderTreeWalk();
+                alternativeInorderTreeWalk();
             }
 
             cout << endl << endl;
@@ -298,8 +298,8 @@ int main() {
     vector<int> vec = {20, 10, 26, 4, 18, 24, 27, 14, 19, 13, 15};
 
     for (int i : vec) {
-        // tree.TreeInsert(i);
-        tree.RecursiveTreeInsert(i);
+        // tree.treeInsert(i);
+        tree.recursiveTreeInsert(i);
     }
 
     cout << "Preorder Traversal : ";
@@ -315,7 +315,7 @@ int main() {
     cout << "Alternative Inorder Traversal: ";
     tree.displayTree(5);
 
-    tree.TreeDeletion(13);
+    tree.treeDeletion(13);
     cout << "Delete 13: ";
     tree.displayTree(5);
 
