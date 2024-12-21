@@ -128,6 +128,62 @@ class RBT {
             root->color = BLACK;
         }
 
+        Node* RBTreeSearch(Node* T, int val) {
+            if (T == nullptr || T->data == val) {
+                return T;
+            }
+
+            if (val < T->data) {
+                return RBTreeSearch(T->left, val);
+            } else {
+                return RBTreeSearch(T->right, val);
+            }
+        }
+
+        void RBTransplant(Node* &u, Node* &v) {
+            if (u->parent == sentinel) {
+                root = v;
+            } else if (u == u->parent->left) {
+                u->parent->left = v;
+            } else {
+                u->parent->right = v;
+            }
+
+            v->parent = u->parent;
+        }
+
+        Node* RBTreeMinimum() {
+            Node* x = root;
+
+            while (x->left != nullptr) {
+                x = x->left;
+            }
+
+            return x;
+        }
+
+        void RBDeleteion(int val) {
+            Node* z = RBTreeSearch(root, val);
+            
+            if (z->left == nullptr) {
+                RBTransplant(z, z->right);
+            } else if (z->right == nullptr) {
+                RBTransplant(z, z->left);
+            } else {
+                Node* y = RBTreeMinimum();
+
+                if (y != z->right) {
+                    RBTransplant(y, y->right);
+                    y->right = z->right;
+                    y->right->parent = y;
+                }
+
+                RBTransplant(z, y);
+                y->left = z->left;
+                y->left->parent = y;
+            }
+        }
+
         void inorderTreeWalk(Node* T) {
             Node* x = T;
 
