@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int memorizedCutRodAux(vector<int> p, int n, vector<int> r) {
+int memoizedCutRodAux(vector<int> p, int n, vector<int> r) {
     if (r[n] >= 0) return r[n]; // already have a solution fr length n?
 
     int q;
@@ -13,7 +13,7 @@ int memorizedCutRodAux(vector<int> p, int n, vector<int> r) {
         q = INT_MIN;
         
         for (int i = 0; i < n; i++) {   // i is the position of the first cut
-            q = max(q, p[i] + memorizedCutRodAux(p, n - (i + 1), r));
+            q = max(q, p[i] + memoizedCutRodAux(p, n - (i + 1), r));
         }
     }
 
@@ -25,7 +25,7 @@ int memorizedCutRodAux(vector<int> p, int n, vector<int> r) {
 int memorizedCutRod(vector<int> p, int n) {
     vector<int> r(n + 1, INT_MIN);
 
-    return memorizedCutRodAux(p, n, r);
+    return memoizedCutRodAux(p, n, r);
 }
 
 int main() {
